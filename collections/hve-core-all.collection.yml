@@ -8,6 +8,8 @@ tags:
 items:
 - path: .github/agents/ado/ado-prd-to-wit.agent.md
   kind: agent
+- path: .github/agents/code-review/functional-code-review.agent.md
+  kind: agent
 - path: .github/agents/data-science/gen-data-spec.agent.md
   kind: agent
 - path: .github/agents/data-science/gen-jupyter-notebook.agent.md
@@ -87,6 +89,8 @@ items:
 - path: .github/prompts/ado/ado-process-my-work-items-for-task-planning.prompt.md
   kind: prompt
 - path: .github/prompts/ado/ado-update-wit-items.prompt.md
+  kind: prompt
+- path: .github/prompts/code-review/functional-code-review.prompt.md
   kind: prompt
 - path: .github/prompts/design-thinking/dt-handoff-implementation-space.prompt.md
   kind: prompt
