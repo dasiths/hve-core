@@ -267,10 +267,13 @@ jobs:
         run: |
           cp "$BUNDLE_PATH" \
             "dist/${{ steps.vsix.outputs.name }}.sigstore.json"
+          jq -c '.dsseEnvelope' "$BUNDLE_PATH" > \
+            "dist/${{ steps.vsix.outputs.name }}.intoto.jsonl"
           gh release upload "${{ needs.prerelease-tag.outputs.tag_name }}" \
             "${{ steps.vsix.outputs.file }}" \
             "dist/${{ steps.vsix.outputs.name }}.spdx.json" \
             "dist/${{ steps.vsix.outputs.name }}.sigstore.json" \
+            "dist/${{ steps.vsix.outputs.name }}.intoto.jsonl" \
             --clobber -R "${{ github.repository }}"
 
   publish-release:
