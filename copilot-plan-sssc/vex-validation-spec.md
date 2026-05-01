@@ -12,9 +12,9 @@ Companion to the implementation plan at `.copilot-tracking/plans/2026-04-29/vex-
 
 ### P1-FILE: VEX Document
 
-- [ ] File exists at `security/vex/hve-core.openvex.json`
-- [ ] Valid JSON that parses without error
-- [ ] Contains required OpenVEX fields:
+- [x] File exists at `security/vex/hve-core.openvex.json`
+- [x] Valid JSON that parses without error
+- [x] Contains required OpenVEX fields:
   - `@context` equals `https://openvex.dev/ns/v0.2.0`
   - `@id` is a string starting with `https://github.com/microsoft/hve-core/`
   - `author` is a non-empty string
@@ -24,47 +24,47 @@ Companion to the implementation plan at `.copilot-tracking/plans/2026-04-29/vex-
 
 ### P1-CODEOWNERS: Ownership
 
-- [ ] `.github/CODEOWNERS` contains a line matching `/security/vex/` with an owner group
-- [ ] Owner group is a valid GitHub team reference (e.g., `@microsoft/edge-ai-core-dev`)
+- [x] `.github/CODEOWNERS` contains a line matching `/security/vex/` with an owner group
+- [x] Owner group is a valid GitHub team reference (e.g., `@microsoft/edge-ai-core-dev`)
 
 ### P1-TEMPLATE: PR Template
 
-- [ ] File exists at `.github/PULL_REQUEST_TEMPLATE/vex-triage.md`
-- [ ] Contains a confidence-band field (one of: High not_affected, High affected, Medium, Low, Vendor-disputed)
-- [ ] Contains an evidence checklist section
-- [ ] Contains a VEX status field
+- [x] File exists at `.github/PULL_REQUEST_TEMPLATE/vex-triage.md`
+- [x] Contains a confidence-band field (one of: High not_affected, High affected, Medium, Low, Vendor-disputed)
+- [x] Contains an evidence checklist section
+- [x] Contains a VEX status field
 
 ### P1-CSPELL: Spelling Dictionary
 
-- [ ] `.cspell/general-technical.txt` contains `openvex` (case-insensitive match)
-- [ ] `.cspell/general-technical.txt` contains `osv` (case-insensitive match)
-- [ ] Entries are in alphabetical order within the file
+- [x] `.cspell/general-technical.txt` contains `openvex` (case-insensitive match)
+- [x] `.cspell/general-technical.txt` contains `osv` (case-insensitive match)
+- [x] Entries are in alphabetical order within the file
 
 ### P1-INSTRUCTIONS: VEX Standards
 
-- [ ] File exists at `.github/instructions/security/vex-standards.instructions.md`
-- [ ] Has valid YAML frontmatter with `description` and `applyTo` fields
-- [ ] Contains the 5-band confidence routing table with columns: Band, Criteria, Agent Action, Human Action
-- [ ] Contains forbidden transitions section listing:
+- [x] File exists at `.github/instructions/security/vex-standards.instructions.md`
+- [x] Has valid YAML frontmatter with `description` and `applyTo` fields
+- [x] Contains the 5-band confidence routing table with columns: Band, Criteria, Agent Action, Human Action
+- [x] Contains forbidden transitions section listing:
   - `unknown reachability → not_affected` as forbidden
   - `unknown reachability → affected` as forbidden
   - Default for uncertain cases = `under_investigation`
-- [ ] Contains licensing posture section (OSV.dev CC0 preferred, NVD public domain, GHSA CC-BY-4.0 avoid quoting)
-- [ ] Contains author-of-record contract (merge commit author = accountable author)
+- [x] Contains licensing posture section (OSV.dev CC0 preferred, NVD public domain, GHSA CC-BY-4.0 avoid quoting)
+- [x] Contains author-of-record contract (merge commit author = accountable author)
 
 ### P1-RELEASE: Pipeline Integration
 
-- [ ] `release-stable.yml` `attest-and-upload` job contains a step that attests VEX file using `actions/attest`
-- [ ] `release-stable.yml` `attest-and-upload` job uploads VEX file via `gh release upload`
-- [ ] `release-stable.yml` `append-verification-notes` references VEX in the verification section
-- [ ] All new action references are SHA-pinned with version comments
+- [x] `release-stable.yml` `attest-and-upload` job contains a step that attests VEX file using `actions/attest`
+- [x] `release-stable.yml` `attest-and-upload` job uploads VEX file via `gh release upload`
+- [x] `release-stable.yml` `append-verification-notes` references VEX in the verification section
+- [x] All new action references are SHA-pinned with version comments
 
 ### P1-VALIDATE: Automated Checks
 
-- [ ] `npm run spell-check` passes (no new spelling errors)
-- [ ] `npm run lint:md` passes (no markdown lint errors in new/modified files)
-- [ ] `npm run lint:frontmatter` passes (frontmatter valid in new instructions files)
-- [ ] `npm run lint:yaml` passes
+- [x] `npm run spell-check` passes (no new spelling errors)
+- [x] `npm run lint:md` passes (no markdown lint errors in new/modified files)
+- [x] `npm run lint:frontmatter` passes (frontmatter valid in new instructions files)
+- [x] `npm run lint:yaml` passes
 
 ## Phase 2: OpenVEX Skill + VEX Generation Instructions
 
