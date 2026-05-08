@@ -1,0 +1,7 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://github.com/microsoft/hve-core/security/vex/2026-05-01",
+  "author": "Microsoft HVE Core Maintainers",
+  "timestamp": "2026-05-01T00:00:00Z",
+  "statements": []
+}

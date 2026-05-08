@@ -706,6 +706,7 @@ openid
 openrowset
 openssh
 opentelemetry
+openvex
 openvpn
 operationalizes
 operationalizing
@@ -1248,6 +1249,7 @@ hipaa
 oidc
 oldsha
 OSSF
+osv
 passwordless
 siem
 sox

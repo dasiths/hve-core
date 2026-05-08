@@ -66,14 +66,14 @@ The two tracks converge at Phase 5 (AI Drafting) where the agent from #1221 powe
 
 Create the foundational VEX document, CODEOWNERS entry, PR template, spelling dictionary updates, and VEX standards instructions file. No AI, no workflows.
 
-- [ ] 1.1 Create `security/vex/hve-core.openvex.json` — Empty OpenVEX document with product identity (`pkg:npm/@microsoft/hve-core`), `@context`, `@id`, `author`, `timestamp`, and empty `statements` array
-- [ ] 1.2 Add CODEOWNERS entry: `/security/vex/ @microsoft/edge-ai-core-dev`
-- [ ] 1.3 Create `.github/PULL_REQUEST_TEMPLATE/vex-triage.md` — PR template for VEX triage changes with evidence checklist and confidence-band fields
-- [ ] 1.4 Add `openvex` and `osv` to `.cspell/general-technical.txt` (alphabetical order)
-- [ ] 1.5 Create `.github/instructions/security/vex-standards.instructions.md` — OpenVEX format reference, confidence-routing rules (5-band table from #1220 §4), forbidden transitions, licensing posture (OSV preferred), author-of-record contract
-- [ ] 1.6 Extend `release-stable.yml` `attest-and-upload` job to attest and upload VEX file alongside existing SBOM artifacts
-- [ ] 1.7 Extend `release-stable.yml` `upload-plugin-packages` job similarly for plugin releases
-- [ ] 1.8 Update `release-stable.yml` `append-verification-notes` job to reference VEX in release notes
+- [x] 1.1 Create `security/vex/hve-core.openvex.json` — Empty OpenVEX document with product identity (`pkg:npm/@microsoft/hve-core`), `@context`, `@id`, `author`, `timestamp`, and empty `statements` array
+- [x] 1.2 Add CODEOWNERS entry: `/security/vex/ @microsoft/edge-ai-core-dev`
+- [x] 1.3 Create `.github/PULL_REQUEST_TEMPLATE/vex-triage.md` — PR template for VEX triage changes with evidence checklist and confidence-band fields
+- [x] 1.4 Add `openvex` and `osv` to `.cspell/general-technical.txt` (alphabetical order)
+- [x] 1.5 Create `.github/instructions/security/vex-standards.instructions.md` — OpenVEX format reference, confidence-routing rules (5-band table from #1220 §4), forbidden transitions, licensing posture (OSV preferred), author-of-record contract
+- [x] 1.6 Extend `release-stable.yml` `attest-and-upload` job to attest and upload VEX file alongside existing SBOM artifacts
+- [x] 1.7 Extend `release-stable.yml` `upload-plugin-packages` job similarly for plugin releases
+- [x] 1.8 Update `release-stable.yml` `append-verification-notes` job to reference VEX in release notes
 
 **Deliverables**: VEX document, CODEOWNERS update, PR template, cspell update, instructions file, release pipeline VEX attestation
 
