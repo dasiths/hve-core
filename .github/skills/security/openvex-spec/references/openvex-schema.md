@@ -22,7 +22,7 @@ The top-level object containing metadata and a collection of VEX statements.
 | `last_updated` | No       | string   | ISO 8601 datetime of the last modification.                                                              |
 | `version`      | Yes      | integer  | Document version. Increment on any content change including statement additions or modifications.         |
 | `tooling`      | No       | string   | Description of tools or processes used to generate the document.                                         |
-| `statements`   | Yes      | array    | Array of statement objects. May be empty for an initial document.                                        |
+| `statements`   | Yes      | array    | Array of statement objects. Must contain at least one statement object.                                  |
 
 ## Statement struct
 
@@ -31,11 +31,11 @@ Each statement asserts the impact a vulnerability has on one or more products at
 | Field                      | Required    | Type     | Description                                                                                                  |
 |----------------------------|-------------|----------|--------------------------------------------------------------------------------------------------------------|
 | `@id`                      | No          | string   | Optional IRI making the statement externally referenceable.                                                   |
-| `version`                  | No          | integer  | Statement version. Defaults to zero; required when incremented.                                               |
+| `version`                  | No          | integer  | Statement version. Optional; when present, must be an integer greater than or equal to `1`.                  |
 | `vulnerability`            | Yes         | object   | Vulnerability struct identifying the CVE or other defect. See Vulnerability struct below.                     |
 | `timestamp`                | No          | string   | ISO 8601 datetime when the statement was known to be true. Inherits from the document if omitted.             |
 | `last_updated`             | No          | string   | ISO 8601 datetime when the statement was last updated.                                                        |
-| `products`                 | Conditional | array    | Array of product structs. Required for a complete statement but can inherit from the document.                 |
+| `products`                 | Yes         | array    | Array of product structs. Required on each statement.                                                         |
 | `status`                   | Yes         | string   | One of: `not_affected`, `affected`, `fixed`, `under_investigation`.                                           |
 | `supplier`                 | No          | string   | Supplier of the product or subcomponent.                                                                      |
 | `status_notes`             | No          | string   | Free-form text describing how the status was determined. May reference other VEX information.                  |
@@ -98,7 +98,13 @@ When a field is defined at both document and statement level, the statement valu
   "author": "Microsoft HVE Core Maintainers",
   "timestamp": "2026-05-14T00:00:00Z",
   "version": 1,
-  "statements": []
+  "products": [{ "@id": "pkg:npm/@microsoft/hve-core@3.10.0" }],
+  "statements": [
+    {
+      "vulnerability": { "name": "CVE-2026-XXXXX" },
+      "status": "under_investigation"
+    }
+  ]
 }
 ```
 

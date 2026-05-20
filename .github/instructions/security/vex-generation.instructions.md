@@ -18,9 +18,9 @@ strength. Stronger assertions (especially `not_affected`) require stronger evide
 
 Requires at least one of:
 
-* **Code citation**: file path and line range demonstrating the vulnerable function is unreachable
+* Code citation: file path and line range demonstrating the vulnerable function is unreachable
   (no import path, dead code, or excluded by build configuration).
-* **Mitigation reference**: specific control or configuration that prevents exploitation, with
+* Mitigation reference: specific control or configuration that prevents exploitation, with
   explanation of why it cannot be bypassed.
 
 The justification code must match the evidence type:
@@ -84,13 +84,12 @@ These transitions are never permitted regardless of context.
 
 VEX documents require an accountable author for trust purposes.
 
-* **Drafter**: the AI agent. No trust requirement; the agent performs analysis and drafts the
-  document.
-* **Reviewer**: CODEOWNERS-required human approver who validates evidence and status
-  determinations.
-* **Author of record**: the merge commit author (the human approver). This is the accountable
-  identity.
-* **Trust anchor**: Sigstore identity of the release workflow that attests the VEX document.
+| Role | Description |
+|------|-------------|
+| Drafter | the AI agent. No trust requirement; the agent performs analysis and drafts the document. |
+| Reviewer | CODEOWNERS-required human approver who validates evidence and status determinations. |
+| Author of record | the merge commit author (the human approver). This is the accountable identity. |
+| Trust anchor | Sigstore identity of the release workflow that attests the VEX document. |
 
 The agent must never represent itself as the author of record. The `author` field in OpenVEX
 documents must identify the maintainer team or organization, not the agent.

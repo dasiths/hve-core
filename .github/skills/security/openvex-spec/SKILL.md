@@ -23,7 +23,7 @@ determining vulnerability exploitability status, and looking up CVE data from pu
 | Status                 | Meaning                                                                                         |
 |------------------------|-------------------------------------------------------------------------------------------------|
 | `not_affected`         | The vulnerability is not exploitable in this product. Requires a `justification` or `impact_statement`. |
-| `affected`             | The vulnerability is exploitable. An `action_statement` describing remediation should be included.      |
+| `affected`             | The vulnerability is exploitable. Requires an `action_statement` describing remediation.                |
 | `fixed`                | The vulnerability was present but has been remediated in this product version.                          |
 | `under_investigation`  | The author is evaluating whether the vulnerability affects this product. Safe default for uncertain cases. |
 
@@ -46,29 +46,30 @@ Products use [Package URL (PURL)](https://github.com/package-url/purl-spec) form
 
 ## Normative references
 
-1. [OpenVEX JSON Schema Reference](references/openvex-schema.md) — field definitions, required
+1. [OpenVEX JSON Schema Reference](references/openvex-schema.md): field definitions, required
    versus optional fields, and example documents.
-2. [VEX Status Logic](references/vex-status-logic.md) — status determination decision tree,
+2. [VEX Status Logic](references/vex-status-logic.md): status determination decision tree,
    evidence requirements per status, and forbidden transitions.
-3. [CVE Data Sources](references/cve-data-sources.md) — OSV.dev, NVD, and GitHub Advisory Database
+3. [CVE Data Sources](references/cve-data-sources.md): OSV.dev, NVD, and GitHub Advisory Database
    API references with licensing posture.
 
 ## Skill layout
 
-* `SKILL.md` — this file (skill entrypoint).
-* `references/` — normative reference documents.
-  * `openvex-schema.md` — JSON schema reference with field definitions and examples.
-  * `vex-status-logic.md` — status determination decision tree and forbidden transitions.
-  * `cve-data-sources.md` — CVE data source API references and licensing.
+* `SKILL.md`: this file (skill entrypoint).
+* `references/`: normative reference documents.
+  * `openvex-schema.md`: JSON schema reference with field definitions and examples.
+  * `vex-status-logic.md`: status determination decision tree and forbidden transitions.
+  * `cve-data-sources.md`: CVE data source API references and licensing.
 
 ## Third-Party Attribution
 
-* **Specification**: OpenVEX Specification v0.2.0
-* **Copyright**: © OpenVEX Contributors
-* **License**: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
-* **Source**: <https://github.com/openvex/spec/blob/main/OPENVEX-SPEC.md>
-* **Modifications**: Specification restructured into agent-consumable reference documents with
-  added status determination logic, evidence requirements, and CVE data source guidance.
+| Attribute | Value |
+|-----------|-------|
+| Specification | OpenVEX Specification v0.2.0 |
+| Copyright | © OpenVEX Contributors |
+| License | [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
+| Source | <https://github.com/openvex/spec/blob/main/OPENVEX-SPEC.md> |
+| Modifications | Specification restructured into agent-consumable reference documents with added status determination logic, evidence requirements, and CVE data source guidance. |
 
 ---
 
