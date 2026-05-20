@@ -3,8 +3,6 @@ title: OpenVEX JSON Schema Reference
 description: Field definitions, types, and constraints for OpenVEX v0.2.0 documents
 ---
 
-# OpenVEX JSON Schema Reference
-
 OpenVEX documents are serialized as JSON-LD. File encoding must be UTF-8. This reference covers
 the v0.2.0 specification.
 
@@ -79,15 +77,16 @@ Valid values for the `justification` field when `status` is `not_affected`:
 
 ## Inheritance flow
 
-Statements can inherit `timestamp` and `products` from the parent document. A valid statement
-requires four data points (either directly or via inheritance):
+Statements can inherit `timestamp` from the parent document. A valid statement requires four data
+points:
 
-1. One or more products
+1. One or more products (required on each statement)
 2. A status
 3. A vulnerability
-4. A timestamp
+4. A timestamp (directly or inherited from the document)
 
-When a field is defined at both document and statement level, the statement value takes precedence.
+When `timestamp` is defined at both document and statement level, the statement value takes
+precedence. The `products` field has no document-level equivalent and must appear on each statement.
 
 ## Minimal document example
 
@@ -98,10 +97,10 @@ When a field is defined at both document and statement level, the statement valu
   "author": "Microsoft HVE Core Maintainers",
   "timestamp": "2026-05-14T00:00:00Z",
   "version": 1,
-  "products": [{ "@id": "pkg:npm/@microsoft/hve-core@3.10.0" }],
   "statements": [
     {
       "vulnerability": { "name": "CVE-2026-XXXXX" },
+      "products": [{ "@id": "pkg:npm/@microsoft/hve-core@3.10.0" }],
       "status": "under_investigation"
     }
   ]

@@ -3,8 +3,6 @@ title: VEX Status Logic
 description: Status determination decision tree, evidence requirements, and forbidden transitions for OpenVEX triage
 ---
 
-# VEX Status Logic
-
 Decision tree and evidence requirements for determining the correct VEX status when triaging a CVE
 against a codebase.
 
