@@ -90,7 +90,7 @@ draft.
 | High affected     | Vulnerable symbol on a reachable execution path                                                            | Draft `affected` with link to remediation issue                                                   | Approve PR and triage remediation       |
 | Medium            | Symbol reachable in some configurations but ambiguous (feature flags, optional codepaths, runtime conditionals) | Draft `under_investigation` with structured questions for human reviewer                          | Decide final status, edit PR            |
 | Low               | Cannot determine reachability (closed-source dep, dynamic dispatch, native code)                           | Draft `under_investigation` only. Forbidden from drafting `not_affected`.                         | Manual analysis, may downgrade to fixed or not_affected |
-| Vendor-disputed   | OSV/NVD shows dispute or CVSS < 4.0 with no known exploit                                                 | Draft `not_affected` with `inline_mitigations_already_exist` only when accompanied by code citation | Approve PR                              |
+| Vendor-disputed   | OSV/NVD shows dispute or CVSS < 4.0 with no known exploit                                                 | Draft `under_investigation` with `status_notes` recording the dispute source and CVSS rationale     | Review dispute evidence, decide final status    |
 
 ## Status lifecycle
 
