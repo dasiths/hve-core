@@ -1,6 +1,6 @@
 ---
 name: openvex-spec
-description: OpenVEX v0.2.0 specification knowledge base for producing, validating, and interpreting Vulnerability Exploitability eXchange documents - Brought to you by microsoft/hve-core.
+description: OpenVEX v0.2.0 specification reference for producing, validating, and interpreting Vulnerability Exploitability eXchange documents - Brought to you by microsoft/hve-core.
 license: Apache-2.0
 user-invocable: false
 metadata:
@@ -14,9 +14,10 @@ metadata:
 
 # OpenVEX Specification: Skill Entry
 
-This `SKILL.md` is the **entrypoint** for the OpenVEX specification skill. It encodes the
-**OpenVEX v0.2.0** specification as structured references for producing valid VEX documents,
-determining vulnerability exploitability status, and looking up CVE data from public sources.
+This `SKILL.md` is the **entrypoint** for the OpenVEX specification skill. It provides
+**OpenVEX v0.2.0** schema references for producing valid VEX documents, understanding
+vulnerability exploitability statuses, and looking up CVE data from public sources. Status
+determination logic and agent behavioral rules live in the VEX generation instructions.
 
 ## VEX statuses
 
