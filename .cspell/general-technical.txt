@@ -1252,7 +1252,9 @@ gdpr
 hipaa
 oidc
 oldsha
+openvex
 OSSF
+osv
 passwordless
 siem
 sox
