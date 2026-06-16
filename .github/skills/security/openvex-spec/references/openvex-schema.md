@@ -20,7 +20,7 @@ The top-level object containing metadata and a collection of VEX statements.
 | `last_updated` | No       | string   | ISO 8601 datetime of the last modification.                                                              |
 | `version`      | Yes      | integer  | Document version. Increment on any content change including statement additions or modifications.         |
 | `tooling`      | No       | string   | Description of tools or processes used to generate the document.                                         |
-| `statements`   | Yes      | array    | Array of statement objects. Must contain at least one statement object.                                  |
+| `statements`   | Yes      | array    | Array of statement objects. Populated documents must contain at least one statement; foundation or bootstrap documents may ship an empty array until the first statement is added. |
 
 ## Statement struct
 
