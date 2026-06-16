@@ -6,12 +6,17 @@ This directory contains the complete plan, validation spec, and source issue det
 
 | File | Purpose |
 |------|---------|
+| [vex-overview.md](vex-overview.md) | High-level explanation of how the VEX capability works once implemented — start here |
 | [vex-workflow-and-agent-plan.instructions.md](vex-workflow-and-agent-plan.instructions.md) | Master implementation plan with 7 phases, dependency graph, design decisions, and deliverables |
 | [vex-validation-spec.md](vex-validation-spec.md) | Checkable validation spec (100+ criteria) for verifying each phase's output |
 | [issue-1220-vex-workflow.md](issue-1220-vex-workflow.md) | Full issue description and WilliamBerryiii's technical review for #1220 (VEX Workflow) |
 | [issue-1221-vex-generation-agent.md](issue-1221-vex-generation-agent.md) | Full issue description and WilliamBerryiii's technical review for #1221 (VEX Generation Agent) |
 
 ## How to Use
+
+### Understanding the plan
+
+New to this work? Start with [vex-overview.md](vex-overview.md) for a high-level explanation of how the whole VEX capability fits together once implemented, then return here to distribute and implement individual phases.
 
 ### Distributing work
 

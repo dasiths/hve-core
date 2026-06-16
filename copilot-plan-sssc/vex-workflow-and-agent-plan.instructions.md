@@ -86,11 +86,11 @@ Create the foundational VEX document, CODEOWNERS entry, PR template, spelling di
 
 Create the OpenVEX specification skill and the VEX generation instructions file that encodes the evidence requirements, status logic, confidence routing, and report templates.
 
-- [ ] 2.1 Create `.github/skills/security/openvex-spec/SKILL.md` — Skill entrypoint with OpenVEX schema reference, status definitions (`not_affected`, `affected`, `fixed`, `under_investigation`), justification codes, product identifier conventions (PURL), and document structure
-- [ ] 2.2 Create `.github/skills/security/openvex-spec/references/openvex-schema.md` — Detailed OpenVEX v0.2.0 JSON schema reference with field definitions, required vs optional fields, and example documents
-- [ ] 2.3 Create `.github/skills/security/openvex-spec/references/vex-status-logic.md` — Status determination decision tree, justification code reference, and evidence requirements per status
-- [ ] 2.4 Create `.github/skills/security/openvex-spec/references/cve-data-sources.md` — Data source reference covering OSV.dev API, NVD API 2.0, and GitHub Advisory DB with licensing posture, API endpoints, and response schemas
-- [ ] 2.5 Create `.github/instructions/security/vex-generation.instructions.md` — Evidence requirements, confidence-routing rules (5-band table), forbidden transitions (`unknown reachability → not_affected` ❌, `unknown reachability → affected` ❌), licensing posture, author-of-record contract, report templates
+- [x] 2.1 Create `.github/skills/security/openvex-spec/SKILL.md` — Skill entrypoint with OpenVEX schema reference, status definitions (`not_affected`, `affected`, `fixed`, `under_investigation`), justification codes, product identifier conventions (PURL), and document structure
+- [x] 2.2 Create `.github/skills/security/openvex-spec/references/openvex-schema.md` — Detailed OpenVEX v0.2.0 JSON schema reference with field definitions, required vs optional fields, and example documents
+- [x] 2.3 Create `.github/skills/security/openvex-spec/references/vex-status-logic.md` — Status determination decision tree, justification code reference, and evidence requirements per status
+- [x] 2.4 Create `.github/skills/security/openvex-spec/references/cve-data-sources.md` — Data source reference covering OSV.dev API, NVD API 2.0, and GitHub Advisory DB with licensing posture, API endpoints, and response schemas
+- [x] 2.5 Create `.github/instructions/security/vex-generation.instructions.md` — Evidence requirements, confidence-routing rules (5-band table), forbidden transitions (`unknown reachability → not_affected` ❌, `unknown reachability → affected` ❌), licensing posture, author-of-record contract, report templates
 
 **Deliverables**: OpenVEX skill (SKILL.md + 3 reference files), VEX generation instructions file
 
