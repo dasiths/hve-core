@@ -67,9 +67,15 @@ The non-negotiable guard: when reachability or exploitability cannot be determin
 ### Phase 2: CVE Enrichment
 
 1. For each finding, resolve the input precedence: Trivy JSON > OSV-Scanner JSON > SPDX-JSON SBOM.
-2. Fetch CVE details from OSV.dev and NVD API 2.0 via `web`: affected ranges, CVSS vector, CWE, advisory URLs, and the vulnerable symbol when available.
-3. Respect the licensing posture: paraphrase only CC0 or public-domain records, reference GHSA by URL only, and write original prose.
-4. Assemble one enriched CVE profile per finding.
+2. Collect every identifier on the finding: the scanner's primary id plus all aliases (`CVE-`, `GHSA-`, `PYSEC-`, and similar).
+3. Fetch CVE details via `web`, querying each source by the identifier it is keyed on, and falling back across aliases until one resolves:
+   * GitHub Advisory Database (`api.github.com/advisories/{GHSA_ID}`) and OSV.dev (`api.osv.dev/v1/vulns/{OSV_ID}` or the package query) by the `GHSA-`/`PYSEC-`/native id. A `CVE-` id returns `404` on both.
+   * NVD API 2.0 by the `CVE-` id, for CVSS vectors and CWE.
+   Gather affected ranges, CVSS vector, CWE, advisory URLs, and the vulnerable symbol when available.
+4. When OSV.dev and NVD are unreachable (for example, a sandboxed workflow without them in the `network:` allowlist), fall back to the GitHub Advisory Database, which is reachable by default and returns the CVE alias, CVSS vector, severity, and affected packages.
+5. Only treat advisory data as unavailable after every identifier has been tried against every reachable source; record the gap rather than fabricating data.
+6. Respect the licensing posture: paraphrase only CC0 or public-domain records, reference GHSA prose by URL only, and write original prose. Factual metadata (identifiers, CVSS, severity, affected ranges) may be used from any source.
+7. Assemble one enriched CVE profile per finding.
 
 ### Phase 3: Exploitability Analysis
 
