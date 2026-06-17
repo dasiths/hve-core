@@ -52,13 +52,31 @@ When drafting VEX content, follow these rules for external data:
 |--------------------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | OSV.dev            | Mixed (varies by upstream source) | Check record provenance before paraphrasing. Only paraphrase CC0 or public domain records. Write original prose for CC-BY-4.0 sourced records. |
 | NVD API 2.0        | US Gov public domain              | Use for CVSS vectors and CWE classification.                                                                                                   |
-| GitHub Advisory DB | CC-BY-4.0                         | Reference URLs and identifiers only. Do not quote or closely paraphrase prose.                                                                 |
+| GitHub Advisory DB | CC-BY-4.0                         | Identifiers, aliases, CVSS, severity, and affected ranges (factual metadata) plus reference URLs. Do not quote or closely paraphrase prose.    |
 
 OSV.dev aggregates records from multiple databases. Check the record `id` prefix (`GHSA-` = CC-BY-4.0,
 `RUSTSEC-` = CC0, `CVE-` from NVD = public domain) to determine the upstream license. When the
 upstream license is unclear, write original prose and cite the record URL as a reference.
 
 Write original remediation and impact prose. Do not copy from any external source.
+
+## Identifier resolution and alias fallback
+
+Each data source is keyed by a different identifier, so a single-id lookup misses records that exist
+under an alias. OSV.dev and the GitHub Advisory Database are keyed by the native advisory id
+(`GHSA-`, `PYSEC-`, and similar) and return `404` for a `CVE-` query; NVD is keyed by the `CVE-` id.
+
+For each finding:
+
+1. Collect every identifier: the scanner's primary id plus all `aliases`.
+2. Query each source by the id it is keyed on (GitHub Advisory DB and OSV.dev by `GHSA-`/`PYSEC-`/native id; NVD by `CVE-`), and walk the aliases until a source resolves. The OSV package query resolves by package and version regardless of id.
+3. Keep the first authoritative value per field (NVD for CVSS and CWE; OSV for affected ranges).
+4. Treat advisory data as unavailable only after every identifier has been tried against every reachable source.
+
+The GitHub Advisory Database (`api.github.com`) is reachable in the gh-aw sandbox by default, while
+`api.osv.dev` and `services.nvd.nist.gov` require entries in the workflow `network:` allowlist. When
+OSV.dev and NVD are unreachable, fall back to the GitHub Advisory Database for the CVE alias, CVSS
+vector, severity, and affected packages.
 
 ## Report templates
 

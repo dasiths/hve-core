@@ -42,6 +42,16 @@ permissions:
   issues: read
   actions: read
 
+# Reach the public advisory databases for CVE enrichment. api.github.com (GitHub
+# Advisory Database) is already in the gh-aw network defaults; OSV.dev and NVD
+# are added here so the agent can resolve advisories by native id and CVE.
+network:
+  allowed:
+    - defaults
+    - api.osv.dev
+    - osv.dev
+    - services.nvd.nist.gov
+
 safe-outputs:
   create-pull-request:
     max: 1
