@@ -24,7 +24,7 @@
     "**/Cargo.lock",
     "CHANGELOG.md",
     "logs/**",
-    "copilot-plan-sssc/**",
+    ".copilot-tracking/**",
     "docs/docusaurus/build/**",
     "docs/docusaurus/coverage/**",
     "dependency-pinning-artifacts/**",
