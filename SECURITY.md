@@ -2,7 +2,7 @@
 title: Security
 description: Security vulnerability reporting procedures and Microsoft's coordinated disclosure policy
 author: Microsoft Security Response Center
-ms.date: 2026-03-01
+ms.date: 2026-06-18
 ms.topic: reference
 keywords:
   - security
@@ -119,7 +119,7 @@ Each attested artifact produces a set of companion files uploaded alongside the 
 | `.spdx.json`     | SPDX 2.3 JSON          | Software Bill of Materials                     |
 | `.sigstore.json` | Sigstore bundle (JSON) | Cryptographic attestation envelope             |
 | `.intoto.jsonl`  | in-toto DSSE envelope  | Provenance statement extracted from the bundle |
-| `.openvex.json`  | OpenVEX v0.2.0 JSON    | Vulnerability exploitability statements (VEX)   |
+| `.openvex.json`  | OpenVEX v0.2.0 JSON    | Vulnerability exploitability statements (VEX)  |
 
 The `.sigstore.json` bundle contains the full Sigstore verification material. The `.intoto.jsonl` file is the DSSE envelope extracted from the bundle for tools that consume in-toto provenance directly.
 

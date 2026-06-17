@@ -24,9 +24,9 @@ Every HVE Core release publishes a Vulnerability Exploitability eXchange (VEX) d
 
 A scanner run against the SBOM can report dozens of CVEs in transitive dependencies. Most are not exploitable in HVE Core: the vulnerable function is never called, the code path is unreachable, or the dependency is only used at build time. The VEX document records a per-vulnerability determination so you can separate real exposure from scanner noise.
 
-| Artifact | Answers | Format |
-|----------|---------|--------|
-| SBOM     | Which components and versions ship in the release | SPDX 2.3 JSON |
+| Artifact | Answers                                                     | Format              |
+|----------|-------------------------------------------------------------|---------------------|
+| SBOM     | Which components and versions ship in the release           | SPDX 2.3 JSON       |
 | VEX      | Whether a known vulnerability affects this product, and why | OpenVEX v0.2.0 JSON |
 
 The two are designed to be consumed together: a scanner reads the SBOM to find candidate vulnerabilities, then applies the VEX document to suppress the ones marked `not_affected`.
@@ -75,22 +75,22 @@ A successful verification confirms the artifact was produced by the official HVE
 
 Each statement in the VEX document assigns one of four OpenVEX status values to a vulnerability:
 
-| Status                | Meaning                                                                              | What you should do                                                        |
-|-----------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| `not_affected`        | The vulnerability is present in a dependency but is not exploitable in HVE Core.      | Safe to suppress or deprioritize. Read the `justification` and `status_notes`. |
-| `affected`            | The vulnerability is exploitable. Remediation is planned or pending.                 | Track the `action_statement`. Apply any documented mitigation.            |
-| `fixed`               | The vulnerability has been remediated in this release.                               | No action required for this version.                                      |
-| `under_investigation` | Triage is in progress. Exploitability has not yet been determined.                   | Treat as potentially exposed until a later release resolves the status.   |
+| Status                | Meaning                                                                          | What you should do                                                             |
+|-----------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `not_affected`        | The vulnerability is present in a dependency but is not exploitable in HVE Core. | Safe to suppress or deprioritize. Read the `justification` and `status_notes`. |
+| `affected`            | The vulnerability is exploitable. Remediation is planned or pending.             | Track the `action_statement`. Apply any documented mitigation.                 |
+| `fixed`               | The vulnerability has been remediated in this release.                           | No action required for this version.                                           |
+| `under_investigation` | Triage is in progress. Exploitability has not yet been determined.               | Treat as potentially exposed until a later release resolves the status.        |
 
 A `not_affected` statement always carries a machine-readable `justification` explaining *why* the vulnerability does not apply:
 
-| Justification code                                  | When it applies                                                  |
-|-----------------------------------------------------|------------------------------------------------------------------|
-| `component_not_present`                             | The vulnerable component is not included in the product.         |
-| `vulnerable_code_not_present`                       | The component is present but the vulnerable code is excluded.    |
-| `vulnerable_code_not_in_execute_path`               | The vulnerable code exists but cannot be reached at runtime.     |
+| Justification code                                  | When it applies                                                      |
+|-----------------------------------------------------|----------------------------------------------------------------------|
+| `component_not_present`                             | The vulnerable component is not included in the product.             |
+| `vulnerable_code_not_present`                       | The component is present but the vulnerable code is excluded.        |
+| `vulnerable_code_not_in_execute_path`               | The vulnerable code exists but cannot be reached at runtime.         |
 | `vulnerable_code_cannot_be_controlled_by_adversary` | The code is reachable but attacker-controlled input cannot reach it. |
-| `inline_mitigations_already_exist`                  | Built-in protections prevent exploitation.                       |
+| `inline_mitigations_already_exist`                  | Built-in protections prevent exploitation.                           |
 
 Inspect the document with `jq`:
 

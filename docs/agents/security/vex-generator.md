@@ -26,11 +26,11 @@ The VEX Generator is an AI-assisted agent that turns scanner noise into accounta
 
 ## Prerequisites
 
-| Requirement | Notes |
-|-------------|-------|
-| Trivy CLI v0.63.0+ | Required for Mode 1 (full scan). Mode 2 can run from an existing scan report instead. |
+| Requirement                        | Notes                                                                                                                                                                                  |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Trivy CLI v0.63.0+                 | Required for Mode 1 (full scan). Mode 2 can run from an existing scan report instead.                                                                                                  |
 | Network access to advisory sources | OSV.dev, NVD API 2.0, and the GitHub Advisory Database. In a sandboxed workflow these hosts must be in the `network:` allowlist; the GitHub Advisory Database is reachable by default. |
-| An OpenVEX document | `security/vex/hve-core.openvex.json`. A foundation document with an empty `statements` array is a valid starting point. |
+| An OpenVEX document                | `security/vex/hve-core.openvex.json`. A foundation document with an empty `statements` array is a valid starting point.                                                                |
 
 ## How It Works
 
@@ -62,8 +62,8 @@ Runs the complete pipeline against the repository or a scoped subdirectory.
 /vex-scan scope=scripts/ product=pkg:npm/@microsoft/hve-core
 ```
 
-| Input     | Required | Description                                                              |
-|-----------|----------|--------------------------------------------------------------------------|
+| Input     | Required | Description                                                                 |
+|-----------|----------|-----------------------------------------------------------------------------|
 | `scope`   | No       | Directory or path focus to limit the scan. Defaults to the repository root. |
 | `product` | No       | Product identifier in PURL format. Inferred from the manifest when omitted. |
 
@@ -75,19 +75,19 @@ Triages an existing Trivy or OSV-Scanner JSON report without re-scanning. Use th
 /vex-triage report=osv-results.json
 ```
 
-| Input    | Required | Description                                               |
-|----------|----------|-----------------------------------------------------------|
+| Input    | Required | Description                                                |
+|----------|----------|------------------------------------------------------------|
 | `report` | Yes      | Path to a Trivy JSON, OSV-Scanner JSON, or SPDX-JSON file. |
 
 ## Confidence Routing
 
 The agent classifies each finding into a confidence band, and each band constrains the status it is allowed to draft. The non-negotiable rule: when reachability or exploitability cannot be determined, the only valid status is `under_investigation`. The agent is forbidden from drafting `not_affected` at low confidence.
 
-| Confidence | Reachability evidence | Status the agent may draft |
-|------------|-----------------------|----------------------------|
-| High       | Vulnerable symbol provably unreachable | `not_affected` with a justification code and code citations |
-| High       | Vulnerable symbol on a reachable path  | `affected` with a remediation note |
-| Medium / Low / Vendor-disputed | Reachability ambiguous or undeterminable | `under_investigation` only |
+| Confidence                     | Reachability evidence                    | Status the agent may draft                                  |
+|--------------------------------|------------------------------------------|-------------------------------------------------------------|
+| High                           | Vulnerable symbol provably unreachable   | `not_affected` with a justification code and code citations |
+| High                           | Vulnerable symbol on a reachable path    | `affected` with a remediation note                          |
+| Medium / Low / Vendor-disputed | Reachability ambiguous or undeterminable | `under_investigation` only                                  |
 
 The authoritative routing rules and forbidden-transition list live in the agent and its referenced instructions; see the [VEX generation instructions](https://github.com/microsoft/hve-core/blob/main/.github/instructions/security/vex-generation.instructions.md).
 

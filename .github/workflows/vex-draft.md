@@ -124,11 +124,11 @@ existing finding set) non-interactively.
 6. **Route by confidence.** Classify each finding into a confidence band and
    draft the status the band permits:
 
-   | Confidence band | Criteria | Status the agent may draft |
-   |-----------------|----------|----------------------------|
-   | High, not_affected | Vulnerable symbol provably unreachable | `not_affected` with the matching justification code plus code citations |
-   | High, affected | Vulnerable symbol on a reachable path | `affected`, with a note on the remediation need |
-   | Medium, Low, or Vendor-disputed | Reachability ambiguous or undeterminable | `under_investigation` only |
+   | Confidence band                 | Criteria                                 | Status the agent may draft                                              |
+   |---------------------------------|------------------------------------------|-------------------------------------------------------------------------|
+   | High, not_affected              | Vulnerable symbol provably unreachable   | `not_affected` with the matching justification code plus code citations |
+   | High, affected                  | Vulnerable symbol on a reachable path    | `affected`, with a note on the remediation need                         |
+   | Medium, Low, or Vendor-disputed | Reachability ambiguous or undeterminable | `under_investigation` only                                              |
 
    The non-negotiable guard: when reachability or exploitability cannot be
    determined, the only valid status is `under_investigation`. You are

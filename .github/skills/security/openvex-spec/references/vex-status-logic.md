@@ -40,13 +40,13 @@ Each status requires specific evidence to support the determination.
 
 ### not_affected
 
-| Justification code                                    | Required evidence                                                                 |
-|-------------------------------------------------------|-----------------------------------------------------------------------------------|
-| `component_not_present`                               | Dependency tree output showing the component is absent.                           |
-| `vulnerable_code_not_present`                         | Build configuration or tree-shaking evidence showing vulnerable code is excluded. |
-| `vulnerable_code_not_in_execute_path`                 | Code citation (file and line range) showing no call path reaches the vulnerable function. |
-| `vulnerable_code_cannot_be_controlled_by_adversary`   | Analysis showing attacker-controlled input cannot reach the vulnerable code path.  |
-| `inline_mitigations_already_exist`                    | Reference to specific mitigation controls with explanation of how they prevent exploitation. |
+| Justification code                                  | Required evidence                                                                            |
+|-----------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `component_not_present`                             | Dependency tree output showing the component is absent.                                      |
+| `vulnerable_code_not_present`                       | Build configuration or tree-shaking evidence showing vulnerable code is excluded.            |
+| `vulnerable_code_not_in_execute_path`               | Code citation (file and line range) showing no call path reaches the vulnerable function.    |
+| `vulnerable_code_cannot_be_controlled_by_adversary` | Analysis showing attacker-controlled input cannot reach the vulnerable code path.            |
+| `inline_mitigations_already_exist`                  | Reference to specific mitigation controls with explanation of how they prevent exploitation. |
 
 ### affected
 
@@ -69,12 +69,12 @@ Each status requires specific evidence to support the determination.
 
 The following transitions are forbidden. An agent must never produce these determinations.
 
-| From state              | To state        | Why forbidden                                                                    |
-|-------------------------|-----------------|----------------------------------------------------------------------------------|
-| Unknown reachability    | `not_affected`  | Cannot assert non-exploitability without evidence that code is unreachable.      |
-| Unknown reachability    | `affected`      | Cannot assert exploitability without evidence that code is reachable.            |
-| No analysis performed   | `not_affected`  | Absence of evidence is not evidence of absence.                                  |
-| No analysis performed   | `affected`      | Vulnerability presence alone does not confirm exploitability.                    |
+| From state            | To state       | Why forbidden                                                               |
+|-----------------------|----------------|-----------------------------------------------------------------------------|
+| Unknown reachability  | `not_affected` | Cannot assert non-exploitability without evidence that code is unreachable. |
+| Unknown reachability  | `affected`     | Cannot assert exploitability without evidence that code is reachable.       |
+| No analysis performed | `not_affected` | Absence of evidence is not evidence of absence.                             |
+| No analysis performed | `affected`     | Vulnerability presence alone does not confirm exploitability.               |
 
 **Default rule**: when reachability or exploitability is uncertain, the only valid status is
 `under_investigation`.
@@ -84,13 +84,13 @@ The following transitions are forbidden. An agent must never produce these deter
 The agent classifies each finding into a confidence band that determines what it is allowed to
 draft.
 
-| Band              | Criteria                                                                                                   | Allowed agent action                                                                              | Required human action                   |
-|-------------------|------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------|
-| High not_affected | Vulnerable symbol provably unreachable (no import path, dead code, or guarded by mitigation)               | Draft `not_affected` with justification code and code citations                                   | Approve PR (skim evidence)              |
-| High affected     | Vulnerable symbol on a reachable execution path                                                            | Draft `affected` with link to remediation issue                                                   | Approve PR and triage remediation       |
-| Medium            | Symbol reachable in some configurations but ambiguous (feature flags, optional code paths, runtime conditionals) | Draft `under_investigation` with structured questions for human reviewer                          | Decide final status, edit PR            |
-| Low               | Cannot determine reachability (closed-source dep, dynamic dispatch, native code)                           | Draft `under_investigation` only. Forbidden from drafting `not_affected`.                         | Manual analysis, may transition to `fixed` or `not_affected` |
-| Vendor-disputed   | OSV/NVD shows dispute or CVSS < 4.0 with no known exploit                                                 | Draft `under_investigation` with `status_notes` recording the dispute source and CVSS rationale     | Review dispute evidence, decide final status    |
+| Band              | Criteria                                                                                                         | Allowed agent action                                                                            | Required human action                                        |
+|-------------------|------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| High not_affected | Vulnerable symbol provably unreachable (no import path, dead code, or guarded by mitigation)                     | Draft `not_affected` with justification code and code citations                                 | Approve PR (skim evidence)                                   |
+| High affected     | Vulnerable symbol on a reachable execution path                                                                  | Draft `affected` with link to remediation issue                                                 | Approve PR and triage remediation                            |
+| Medium            | Symbol reachable in some configurations but ambiguous (feature flags, optional code paths, runtime conditionals) | Draft `under_investigation` with structured questions for human reviewer                        | Decide final status, edit PR                                 |
+| Low               | Cannot determine reachability (closed-source dep, dynamic dispatch, native code)                                 | Draft `under_investigation` only. Forbidden from drafting `not_affected`.                       | Manual analysis, may transition to `fixed` or `not_affected` |
+| Vendor-disputed   | OSV/NVD shows dispute or CVSS < 4.0 with no known exploit                                                        | Draft `under_investigation` with `status_notes` recording the dispute source and CVSS rationale | Review dispute evidence, decide final status                 |
 
 ## Status lifecycle
 
