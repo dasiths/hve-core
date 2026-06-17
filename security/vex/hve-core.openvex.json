@@ -1,8 +1,51 @@
 {
   "@context": "https://openvex.dev/ns/v0.2.0",
-  "@id": "https://github.com/microsoft/hve-core/security/vex/2026-05-01",
+  "@id": "https://github.com/microsoft/hve-core/security/vex/2026-06-17-v2",
   "author": "Microsoft HVE Core Maintainers",
   "timestamp": "2026-05-01T00:00:00Z",
-  "version": 1,
-  "statements": []
+  "last_updated": "2026-06-17T16:14:03Z",
+  "version": 2,
+  "tooling": "GitHub Copilot VEX Generator (draft for human review)",
+  "statements": [
+    {
+      "vulnerability": {
+        "@id": "https://nvd.nist.gov/vuln/detail/CVE-2026-53550",
+        "name": "CVE-2026-53550",
+        "aliases": ["GHSA-h67p-54hq-rp68"]
+      },
+      "timestamp": "2026-06-17T16:14:03Z",
+      "products": [
+        {
+          "@id": "pkg:npm/hve-core@3.3.101",
+          "subcomponents": [
+            {
+              "@id": "pkg:npm/js-yaml@3.14.2"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "status_notes": "Dependency js-yaml@3.14.2 detected in docs/docusaurus/package-lock.json (documentation build manifest). Source manifest was not available in the analysis environment. CVE-2026-53550 advisory data was not retrievable from OSV.dev or NVD at analysis time. Reachability and exploitability analysis cannot be completed until advisory data is published and the source manifest is available for inspection. The Docusaurus build toolchain does not execute as part of the production runtime, which may be relevant to a future reachability determination. Reviewer questions: (1) Has advisory data for CVE-2026-53550 been published and confirmed accurate? (2) Does the docusaurus build run in any environment where untrusted input reaches js-yaml?"
+    },
+    {
+      "vulnerability": {
+        "@id": "https://nvd.nist.gov/vuln/detail/CVE-2026-48522",
+        "name": "CVE-2026-48522",
+        "aliases": ["GHSA-993g-76c3-p5m4", "PYSEC-2026-175"]
+      },
+      "timestamp": "2026-06-17T16:14:03Z",
+      "products": [
+        {
+          "@id": "pkg:npm/hve-core@3.3.101",
+          "subcomponents": [
+            {
+              "@id": "pkg:pypi/pyjwt@2.12.1"
+            }
+          ]
+        }
+      ],
+      "status": "under_investigation",
+      "status_notes": "Dependency pyjwt@2.12.1 detected in .github/skills/experimental/tts-voiceover/uv.lock (experimental skill lock file). Source manifest was not available in the analysis environment. CVE-2026-48522 and PYSEC-2026-175 advisory data was not retrievable from OSV.dev or NVD at analysis time. The tts-voiceover skill is marked experimental; its deployment surface and whether pyjwt processes externally-supplied JWTs in any deployed configuration is unknown. Reachability and exploitability analysis cannot be completed without advisory data and access to the source manifest. Reviewer questions: (1) Has advisory data for CVE-2026-48522 / PYSEC-2026-175 been published? (2) Does the tts-voiceover skill validate or parse externally-supplied JWTs in any deployment?"
+    }
+  ]
 }
