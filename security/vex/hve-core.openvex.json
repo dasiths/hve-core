@@ -1,8 +1,52 @@
 {
   "@context": "https://openvex.dev/ns/v0.2.0",
-  "@id": "https://github.com/microsoft/hve-core/security/vex/2026-05-01",
+  "@id": "https://github.com/dasiths/hve-core/security/vex/2026-06-17",
   "author": "Microsoft HVE Core Maintainers",
-  "timestamp": "2026-05-01T00:00:00Z",
-  "version": 1,
-  "statements": []
+  "timestamp": "2026-06-17T16:55:55Z",
+  "last_updated": "2026-06-17T16:55:55Z",
+  "version": 2,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2026-53550",
+        "description": "Quadratic-complexity DoS in js-yaml merge key handling via repeated aliases (CWE-407). CVSS v3.1 5.3 (AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L).",
+        "aliases": ["GHSA-h67p-54hq-rp68"]
+      },
+      "products": [
+        {
+          "@id": "pkg:github/dasiths/hve-core@3.3.101",
+          "subcomponents": [
+            {
+              "@id": "pkg:npm/js-yaml@3.14.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_cannot_be_controlled_by_adversary",
+      "impact_statement": "js-yaml 3.14.2 is a transitive build-time dependency of the Docusaurus documentation toolchain at docs/docusaurus/ (not listed in docs/docusaurus/package.json direct dependencies). The merge-key DoS vector requires attacker-controlled YAML input. All YAML processed during the Docusaurus build is author-controlled repository content (markdown frontmatter, configuration files) protected by pull-request review gates. No network-accessible surface exposes untrusted YAML to the js-yaml parse path.",
+      "status_notes": "Reachability analysis: js-yaml parses YAML only during CI documentation builds. Docusaurus is not deployed as a runtime service. The CVSS v3.1 AV:N vector does not apply because there is no network path by which an attacker can supply crafted YAML to the build process without first having a PR merged by a human reviewer. Advisory: https://github.com/advisories/GHSA-h67p-54hq-rp68"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-48522",
+        "description": "PyJWKClient accepts non-HTTP(S) URI schemes (file://, ftp://, data:), enabling SSRF and potential token forgery when jku URL is attacker-influenced (CWE-441, CWE-918). CVSS v3.1 4.2 (AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:N).",
+        "aliases": ["GHSA-993g-76c3-p5m4", "PYSEC-2026-175"]
+      },
+      "products": [
+        {
+          "@id": "pkg:github/dasiths/hve-core@3.3.101",
+          "subcomponents": [
+            {
+              "@id": "pkg:pypi/pyjwt@2.12.1"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "pyjwt 2.12.1 is a transitive dependency of azure-identity within the experimental tts-voiceover skill (.github/skills/experimental/tts-voiceover/uv.lock). The vulnerable class PyJWKClient is never instantiated in any tts-voiceover script. The skill uses azure-identity solely for Azure Speech SDK credential acquisition and does not perform JWT signature verification via user-supplied JWKS URLs. The attack path (attacker-influenced jku URL passed to PyJWKClient) has no execute path in this codebase.",
+      "status_notes": "Confirmed by inspection of generate_voiceover.py and embed_audio.py: no import of jwt or PyJWKClient. pyjwt is absent from pyproject.toml direct dependencies. azure-identity acquires tokens from Microsoft Entra ID endpoints over HTTPS, not from caller-supplied JWKS URLs. Advisory: https://github.com/advisories/GHSA-993g-76c3-p5m4"
+    }
+  ]
 }
