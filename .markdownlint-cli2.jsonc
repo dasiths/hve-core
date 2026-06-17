@@ -3,7 +3,6 @@
     "**/node_modules/**",
     "**/packages/**",
     ".copilot-tracking/**",
-    "copilot-plan-sssc/**",
     "logs/**",
     "evals/results/**",
     "vally-results/**",
