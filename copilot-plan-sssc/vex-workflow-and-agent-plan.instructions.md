@@ -20,13 +20,13 @@ Add VEX capability to hve-core across two complementary tracks:
 - **Workflow track (#1220)**: VEX document, CI detection, release pipeline attestation, consumer documentation
 - **Tooling track (#1221)**: Copilot agent for AI-assisted vulnerability triage producing OpenVEX documents
 
-The two tracks converge at Phase 5 (AI Drafting) where the agent from #1221 powers the automated VEX drafting workflow from #1220.
+The two tracks converge at Phase 6 (AI Drafting) where the agent from #1221 powers the automated VEX drafting workflow from #1220.
 
 ### Design Decisions (from WilliamBerryiii's review)
 
 - **Trust model**: AI drafts, human merges. Merge commit author = accountable author. Sigstore = trust anchor.
 - **Confidence routing**: 5-band system (High not_affected, High affected, Medium, Low, Vendor-disputed). Agent FORBIDDEN from drafting `not_affected` at low confidence.
-- **Licensing**: Prefer OSV.dev (CC0) for drafted prose. NVD (public domain) for CVSS/CWE. Avoid quoting GHSA prose (CC-BY-4.0).
+- **Licensing**: OSV.dev is a mixed-license aggregator — paraphrase only CC0/public-domain records (route by record `id` prefix: `GHSA-`=CC-BY-4.0, `RUSTSEC-`=CC0, `CVE-`=public domain). NVD (public domain) for CVSS/CWE. Reference GHSA by URL only.
 - **Output locations**: Ephemeral in `.copilot-tracking/security/vex/`, persistent reports in `docs/security/reports/`, canonical VEX at `security/vex/`.
 - **SBOM input precedence**: Trivy JSON > OSV-Scanner JSON > SPDX-JSON SBOM.
 - **Maturity**: Ship all new artifacts at `experimental`. Promote to `stable` after ≥3 codebases and ≤5% false-positive rate on `not_affected`.
@@ -103,8 +103,8 @@ Create the OpenVEX specification skill and the VEX generation instructions file 
 
 Create the VEX generator orchestrator agent and the CVE analyzer subagent.
 
-- [ ] 3.1 Create `.github/agents/security/subagents/cve-analyzer.agent.md` — Per-CVE deep exploitability analysis subagent. Tools: `codebase`, `search`, `fetch`, `think`. No model invocation (`disable-model-invocation: true`). Receives enriched CVE profile, traces code reachability, determines VEX status with evidence. Enforces forbidden transitions.
-- [ ] 3.2 Create `.github/agents/security/vex-generator.agent.md` — Orchestrator agent. Tools: `codebase`, `search`, `editFiles`, `fetch`, `runCommands`, `think`, `agent`. References `cve-analyzer` subagent. Runs Trivy CLI scans, fetches CVE details from OSV.dev and NVD, delegates per-CVE analysis, assembles OpenVEX JSON output. References `#file:../../instructions/security/vex-generation.instructions.md` and `#file:../../skills/security/openvex-spec/SKILL.md`.
+- [x] 3.1 Create `.github/agents/security/subagents/cve-analyzer.agent.md` — Per-CVE deep exploitability analysis subagent. Tools (repo-canonical): `search/codebase`, `search/fileSearch`, `search/textSearch`, `read/readFile`, `web`. No model invocation (`disable-model-invocation: true`). Receives enriched CVE profile, traces code reachability, determines VEX status with evidence. Enforces forbidden transitions.
+- [x] 3.2 Create `.github/agents/security/vex-generator.agent.md` — Orchestrator agent. Tools (repo-canonical): `agent`, `todos`, `search/codebase`, `search/fileSearch`, `search/textSearch`, `read/readFile`, `edit/editFiles`, `edit/createFile`, `execute/runInTerminal`, `execute/getTerminalOutput`, `web`. References `cve-analyzer` subagent. Runs Trivy CLI scans, fetches CVE details from OSV.dev and NVD, delegates per-CVE analysis, assembles OpenVEX JSON output. References `#file:../../instructions/security/vex-generation.instructions.md` and `#file:../../skills/security/openvex-spec/SKILL.md`.
 
 **Deliverables**: `vex-generator.agent.md`, `cve-analyzer.agent.md`
 
@@ -117,9 +117,9 @@ Create the VEX generator orchestrator agent and the CVE analyzer subagent.
 
 Create the `/vex-scan` and `/vex-triage` prompts and register all new artifacts in the security collection.
 
-- [ ] 4.1 Create `.github/prompts/security/vex-scan.prompt.md` — Mode 1: full pipeline. Agent: `vex-generator`. Inputs: scope (optional), product name (optional). Runs scan → enrich → analyze → generate.
-- [ ] 4.2 Create `.github/prompts/security/vex-triage.prompt.md` — Mode 2: triage from existing report. Agent: `vex-generator`. Inputs: report path or SBOM path (Trivy JSON, OSV-Scanner JSON, or SPDX-JSON). Skips scan phase.
-- [ ] 4.3 Update `collections/security.collection.yml` — Add all new artifacts:
+- [x] 4.1 Create `.github/prompts/security/vex-scan.prompt.md` — Mode 1: full pipeline. Agent: `vex-generator`. Inputs: scope (optional), product name (optional). Runs scan → enrich → analyze → generate.
+- [x] 4.2 Create `.github/prompts/security/vex-triage.prompt.md` — Mode 2: triage from existing report. Agent: `vex-generator`. Inputs: report path or SBOM path (Trivy JSON, OSV-Scanner JSON, or SPDX-JSON). Skips scan phase.
+- [x] 4.3 Update `collections/security.collection.yml` — Add all new artifacts:
   - Agent: `.github/agents/security/vex-generator.agent.md` (maturity: experimental)
   - Subagent: `.github/agents/security/subagents/cve-analyzer.agent.md` (maturity: experimental)
   - Skill: `.github/skills/security/openvex-spec` (maturity: experimental)
@@ -127,9 +127,9 @@ Create the `/vex-scan` and `/vex-triage` prompts and register all new artifacts 
   - Prompt: `.github/prompts/security/vex-triage.prompt.md` (maturity: experimental)
   - Instruction: `.github/instructions/security/vex-generation.instructions.md` (maturity: experimental)
   - Instruction: `.github/instructions/security/vex-standards.instructions.md` (maturity: experimental)
-- [ ] 4.4 Update `collections/security.collection.md` to document the new VEX capabilities
-- [ ] 4.5 Run `npm run plugin:generate` to regenerate plugin outputs
-- [ ] 4.6 Run `npm run plugin:validate` to confirm collection metadata
+- [x] 4.4 Update `collections/security.collection.md` to document the new VEX capabilities
+- [x] 4.5 Run `npm run plugin:generate` to regenerate plugin outputs
+- [x] 4.6 Run `npm run plugin:validate` to confirm collection metadata
 
 **Deliverables**: 2 prompt files, updated collection YAML + MD, regenerated plugins
 
@@ -201,7 +201,7 @@ Create consumer-facing documentation for VEX verification and agent usage.
 
 ## Success Criteria
 
-See the companion validation spec at `.copilot-tracking/plans/2026-04-29/vex-validation-spec.md`.
+See the companion validation spec at `vex-validation-spec.md`.
 
 ## Phase Dependency Graph
 

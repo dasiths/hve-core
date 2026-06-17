@@ -6,7 +6,7 @@ description: "Validation spec for VEX Workflow (#1220) and VEX Generation Agent 
 
 # VEX Implementation — Validation Spec
 
-Companion to the implementation plan at `.copilot-tracking/plans/2026-04-29/vex-workflow-and-agent-plan.instructions.md`. Each criterion maps to a phase and step. Validators check the box when the criterion passes.
+Companion to the implementation plan at `vex-workflow-and-agent-plan.instructions.md`. Each criterion maps to a phase and step. Validators check the box when the criterion passes.
 
 ## Phase 1: VEX Foundation (Plumbing)
 
@@ -49,7 +49,7 @@ Companion to the implementation plan at `.copilot-tracking/plans/2026-04-29/vex-
   - `unknown reachability → not_affected` as forbidden
   - `unknown reachability → affected` as forbidden
   - Default for uncertain cases = `under_investigation`
-- [x] Contains licensing posture section (OSV.dev CC0 preferred, NVD public domain, GHSA CC-BY-4.0 avoid quoting)
+- [x] Contains licensing posture section (OSV.dev mixed-license routed by record prefix, NVD public domain, GHSA CC-BY-4.0 reference-only)
 - [x] Contains author-of-record contract (merge commit author = accountable author)
 
 ### P1-RELEASE: Pipeline Integration
@@ -103,15 +103,15 @@ Companion to the implementation plan at `.copilot-tracking/plans/2026-04-29/vex-
 
 ### P3-SUBAGENT: CVE Analyzer
 
-- [ ] File exists at `.github/agents/security/subagents/cve-analyzer.agent.md`
-- [ ] Has valid YAML frontmatter with:
+- [x] File exists at `.github/agents/security/subagents/cve-analyzer.agent.md`
+- [x] Has valid YAML frontmatter with:
   - `name` field (e.g., `CVE Analyzer` or `cve-analyzer`)
   - `description` ending with `- Brought to you by microsoft/hve-core`
-  - `tools` list including: `codebase`, `search`, `fetch`, `think`
+  - `tools` list (repo-canonical): `search/codebase`, `search/fileSearch`, `search/textSearch`, `read/readFile`, `web` (no `think` tool exists in this repo)
   - `agents: []` (empty — subagents do not invoke subagents)
   - `disable-model-invocation: true`
   - `user-invocable: false`
-- [ ] Body contains:
+- [x] Body contains:
   - Purpose section describing per-CVE deep analysis
   - Inputs section (enriched CVE profile, codebase context)
   - Analysis steps: code reachability, attack vector assessment, environmental context, evidence collection
@@ -120,18 +120,18 @@ Companion to the implementation plan at `.copilot-tracking/plans/2026-04-29/vex-
 
 ### P3-AGENT: VEX Generator
 
-- [ ] File exists at `.github/agents/security/vex-generator.agent.md`
-- [ ] Has valid YAML frontmatter with:
+- [x] File exists at `.github/agents/security/vex-generator.agent.md`
+- [x] Has valid YAML frontmatter with:
   - `name` field (e.g., `VEX Generator` or `vex-generator`)
   - `description` ending with `- Brought to you by microsoft/hve-core`
-  - `tools` list including: `codebase`, `search`, `editFiles`, `fetch`, `runCommands`, `think`, `agent`
+  - `tools` list (repo-canonical): `agent`, `todos`, `search/codebase`, `search/fileSearch`, `search/textSearch`, `read/readFile`, `edit/editFiles`, `edit/createFile`, `execute/runInTerminal`, `execute/getTerminalOutput`, `web` (`todos` replaces the non-existent `think`)
   - `agents` list including reference to CVE Analyzer subagent
   - `user-invocable: true`
-- [ ] Body contains:
+- [x] Body contains:
   - Purpose section describing the orchestration workflow
   - CAUTION disclaimer block (referencing shared disclaimer instructions)
   - Phase 1: Vulnerability Scan (Trivy CLI via `runCommands`)
-  - Phase 2: CVE Enrichment (OSV.dev + NVD via `fetch`)
+  - Phase 2: CVE Enrichment (OSV.dev + NVD via `web`)
   - Phase 3: Exploitability Analysis (delegates to `cve-analyzer` subagent per CVE)
   - Phase 4: Report Generation (OpenVEX JSON + markdown reports via `editFiles`)
   - Mode 1 (scan) and Mode 2 (triage) differentiation
@@ -140,36 +140,36 @@ Companion to the implementation plan at `.copilot-tracking/plans/2026-04-29/vex-
 
 ### P3-VALIDATE: Automated Checks
 
-- [ ] `npm run lint:md` passes
-- [ ] `npm run lint:frontmatter` passes
+- [x] `npm run lint:md` passes
+- [x] `npm run lint:frontmatter` passes
 
 ## Phase 4: Prompts + Collection Integration
 
 ### P4-PROMPT-SCAN: /vex-scan
 
-- [ ] File exists at `.github/prompts/security/vex-scan.prompt.md`
-- [ ] Has valid YAML frontmatter with:
+- [x] File exists at `.github/prompts/security/vex-scan.prompt.md`
+- [x] Has valid YAML frontmatter with:
   - `name: vex-scan`
   - `agent` referencing VEX Generator
   - `description` ending with `- Brought to you by microsoft/hve-core`
-- [ ] Contains CAUTION disclaimer block
-- [ ] Contains input variables for scope and product name
-- [ ] Requirements section routes to Mode 1 (full pipeline)
+- [x] Contains CAUTION disclaimer block
+- [x] Contains input variables for scope and product name
+- [x] Requirements section routes to Mode 1 (full pipeline)
 
 ### P4-PROMPT-TRIAGE: /vex-triage
 
-- [ ] File exists at `.github/prompts/security/vex-triage.prompt.md`
-- [ ] Has valid YAML frontmatter with:
+- [x] File exists at `.github/prompts/security/vex-triage.prompt.md`
+- [x] Has valid YAML frontmatter with:
   - `name: vex-triage`
   - `agent` referencing VEX Generator
   - `description` ending with `- Brought to you by microsoft/hve-core`
-- [ ] Contains CAUTION disclaimer block
-- [ ] Contains input variables for report/SBOM path
-- [ ] Requirements section routes to Mode 2 (triage from existing report)
+- [x] Contains CAUTION disclaimer block
+- [x] Contains input variables for report/SBOM path
+- [x] Requirements section routes to Mode 2 (triage from existing report)
 
 ### P4-COLLECTION: Security Collection Updates
 
-- [ ] `collections/security.collection.yml` contains entries for all new artifacts:
+- [x] `collections/security.collection.yml` contains entries for all new artifacts:
   - `.github/agents/security/vex-generator.agent.md` (kind: agent, maturity: experimental)
   - `.github/agents/security/subagents/cve-analyzer.agent.md` (kind: agent, maturity: experimental)
   - `.github/skills/security/openvex-spec` (kind: skill, maturity: experimental)
@@ -177,15 +177,15 @@ Companion to the implementation plan at `.copilot-tracking/plans/2026-04-29/vex-
   - `.github/prompts/security/vex-triage.prompt.md` (kind: prompt, maturity: experimental)
   - `.github/instructions/security/vex-generation.instructions.md` (kind: instruction, maturity: experimental)
   - `.github/instructions/security/vex-standards.instructions.md` (kind: instruction, maturity: experimental)
-- [ ] `collections/security.collection.md` documents VEX capabilities
-- [ ] `npm run plugin:generate` completes without error
-- [ ] `npm run plugin:validate` passes (0 errors)
+- [x] `collections/security.collection.md` documents VEX capabilities
+- [x] `npm run plugin:generate` completes without error
+- [x] `npm run plugin:validate` passes (0 errors)
 
 ### P4-VALIDATE: Automated Checks
 
-- [ ] `npm run lint:md` passes
-- [ ] `npm run lint:frontmatter` passes
-- [ ] `npm run lint:collections-metadata` passes
+- [x] `npm run lint:md` passes
+- [x] `npm run lint:frontmatter` passes
+- [x] `npm run lint:collections-metadata` passes
 
 ## Phase 5: VEX Detection Workflow
 
@@ -289,7 +289,7 @@ Companion to the implementation plan at `.copilot-tracking/plans/2026-04-29/vex-
 
 - [ ] Confidence-routing 5-band table is identical in: `vex-standards.instructions.md`, `vex-generation.instructions.md`, `vex-generator.agent.md` (by reference)
 - [ ] Forbidden transitions list is identical across all files that reference it
-- [ ] Licensing posture (OSV CC0 preferred) is consistent across all files
+- [ ] Licensing posture (OSV.dev mixed-license, routed by record prefix) is consistent across all files
 - [ ] Author-of-record contract is consistent across all files
 - [ ] Evidence requirements match between instructions and agent files
 - [ ] CAUTION disclaimer blocks reference `disclaimer-language.instructions.md`
