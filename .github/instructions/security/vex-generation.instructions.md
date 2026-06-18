@@ -110,6 +110,7 @@ The generated `hve-core.openvex.json` document containing all VEX statements. Mu
 * Validate against the OpenVEX v0.2.0 schema (see `openvex-schema.md` reference).
 * Increment the document `version` field.
 * Set `timestamp` only on first issuance. Update `last_updated` to the current generation time.
+* Set the `tooling` field to record document provenance: the drafting agent plus the human-reviewed, Sigstore-attested release process.
 * Preserve existing statements that were not re-analyzed.
 * Use PURL format for all product identifiers.
 

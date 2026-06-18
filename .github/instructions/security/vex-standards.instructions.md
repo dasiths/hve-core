@@ -60,8 +60,9 @@ can detect new revisions:
 * Set `timestamp` (and `last_updated`, when present) to the current UTC time of issuance.
 * Increment the integer `version` field by one.
 * Regenerate `@id` so it is unique per revision (for example, embed the issuance date or version in the IRI).
+* Set the `tooling` field to record document provenance: the AI agent that drafted the statements and the human-reviewed, Sigstore-attested release process that publishes them. This keeps provenance inside the document itself, not only in the external attestation.
 
-Reviewers must reject any statement-changing PR that leaves `version`, `timestamp`, or `@id` stale.
+Reviewers must reject any statement-changing PR that leaves `version`, `timestamp`, or `@id` stale, or that drops the `tooling` provenance field.
 The foundation document ships with an empty `statements` array and therefore carries no product
 identity until the first triage PR adds a product-bearing statement.
 
@@ -73,3 +74,4 @@ Verify compliance with these standards by checking:
 * Data source licensing is respected (no quoted GHSA prose)
 * Every merged VEX statement has an identifiable human author via merge commit
 * `version`, `timestamp`, and `@id` were updated in any statement-changing PR
+* `tooling` records the document provenance (AI-drafted, human-reviewed, attested at release)
