@@ -30,8 +30,8 @@ Orchestrate AI-assisted vulnerability triage end to end: scan dependencies, enri
 
 Follow these authoritative sources; do not duplicate or paraphrase their tables in output:
 
-* #file:../../skills/security/openvex-spec/SKILL.md — OpenVEX v0.2.0 schema, status definitions, justification codes, and document structure.
-* #file:../../skills/security/openvex-spec/references/vex-status-logic.md — decision tree, evidence requirements, confidence bands, and forbidden transitions.
+* Use the skill `openvex-spec` for OpenVEX v0.2.0 schema, status definitions, justification codes, and document structure.
+* Use the file `references/vex-status-logic.md` from the `openvex-spec` skill for decision tree, evidence requirements, confidence bands, and forbidden transitions.
 * #file:../../instructions/security/vex-generation.instructions.md — evidence thresholds, confidence routing, licensing posture, report templates, and SBOM input precedence.
 * #file:../../instructions/security/vex-standards.instructions.md — author-of-record contract and document mutation contract for `security/vex/hve-core.openvex.json`.
 
