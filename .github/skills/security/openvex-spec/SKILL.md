@@ -8,7 +8,6 @@ metadata:
   spec_version: "1.0"
   framework_revision: "1.0.0"
   last_updated: "2026-05-14"
-  skill_based_on: "https://github.com/dasiths/ai_generated_vex"
   content_based_on: "https://github.com/openvex/spec/blob/main/OPENVEX-SPEC.md"
 ---
 
