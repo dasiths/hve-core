@@ -3,7 +3,7 @@ title: Build Workflows
 description: GitHub Actions CI/CD pipeline architecture for validation, security, and release automation
 sidebar_position: 3
 author: WilliamBerryiii
-ms.date: 2026-06-30
+ms.date: 2026-08-17
 ms.topic: overview
 ---
 
@@ -67,7 +67,6 @@ flowchart TD
 | `msdate-freshness-check.yml`         | Schedule, manual          | ms.date freshness validation across documentation                 |
 | `label-sync.yml`                     | Push to main, manual      | Repository label synchronization                                  |
 | `workflow-permissions-scan.yml`      | Schedule, manual          | GitHub Actions permissions audit                                  |
-| `weekly-gh-code-scanning.yml`        | Monday 3 AM UTC, manual   | Weekly GitHub code scanning alert retrieval and issue creation    |
 | `vex-detect.yml`                     | Schedule, release, manual | Dependency vulnerability scan and VEX triage issue creation       |
 
 GitHub Agentic Workflow markdown files (`issue-triage.md`, `issue-implement.md`, `pr-review.md`, `dependency-pr-review.md`, `doc-update-check.md`, and `vex-draft.md`) compile to `*.lock.yml` workflows and are documented in [Agentic Workflows](agentic-workflows).
